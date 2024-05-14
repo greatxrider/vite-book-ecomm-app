@@ -17,8 +17,6 @@ https://developer.nytimes.com/docs/books-product/1/routes/reviews.json/get
 
 API-key:
 
-AIzaSyD3DI_X4QVRgZsY6OpvLxDhUjopDYomKv4
-
 https://www.googleapis.com/books/v1/volumes?q=subject:computers&orderBy=newest&startIndex=10&maxResults=20&filter=paid-ebooks&key=AIzaSyD3DI_X4QVRgZsY6OpvLxDhUjopDYomKv4
 
 UI KIT: 
