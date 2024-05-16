@@ -1,8 +1,0 @@
-.verticalhr {
-  width: 1px; /* Thin width to make it a vertical line */
-  height: 100px; /* Adjust the height as needed */
-  background-color: black; /* Solid color for the line */
-  border: none; /* Remove default border */
-  margin: 0 auto; /* Center the vertical line */
-  border: "1px solid black";
-}
