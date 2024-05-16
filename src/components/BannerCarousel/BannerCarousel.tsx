@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Carousel,
     CarouselItem,
     CarouselControl,
     CarouselIndicators,
-    CarouselCaption,
 } from 'reactstrap';
-import './HeadingCarousel.module.css';
+import { Row, Card, CardBody, CardText, Button, CardTitle } from 'reactstrap';
+import styles from './BannerCarousel.module.css';
 
-interface HeadingCarouselProps {
+interface BannerCarouselProps {
     items: {
-        src: string;
-        altText: string;
-        caption: string;
-        key: number;
+        id: string,
+        volumeInfo: {
+            title: string,
+            authors: string[],
+            description: string,
+            imageLinks: {
+                smallThumbnail: string,
+                thumbnail: string
+            }
+            categories: string[];
+        }
+        saleInfo: {
+            retailPrice: {
+                amount: number,
+                currencyCode: string
+            }
+        }
     }[];
 }
 
-const HeadingCarousel = ({ items }: HeadingCarouselProps) => {
+const BannerCarousel = ({ items }: BannerCarouselProps) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
 
@@ -39,17 +52,35 @@ const HeadingCarousel = ({ items }: HeadingCarouselProps) => {
     };
 
     const slides = items.map((item) => {
+        const { title } = item.volumeInfo;
+        const { thumbnail } = item.volumeInfo.imageLinks;
+        const { amount, currencyCode } = item.saleInfo.retailPrice;
+
         return (
             <CarouselItem
                 onExiting={() => setAnimating(true)}
                 onExited={() => setAnimating(false)}
-                key={item.src}
+                key={item.id}
             >
-                <img src={item.src} alt={item.altText} />
-                <CarouselCaption
-                    captionText={item.caption}
-                    captionHeader={item.caption}
-                />
+                <Card
+                    style={{
+                        width: '18rem'
+                    }}
+                >
+                    <img
+                        alt={item.id}
+                        src={thumbnail}
+                    />
+                    <CardBody>
+                        <CardTitle tag="h5">
+                            {title}
+                        </CardTitle>
+                        <CardText>
+                            {currencyCode ? '$' : null}{amount}
+                        </CardText>
+                        <Button>Add to cart</Button>
+                    </CardBody>
+                </Card>
             </CarouselItem>
         );
     });
@@ -80,4 +111,4 @@ const HeadingCarousel = ({ items }: HeadingCarouselProps) => {
     );
 }
 
-export default HeadingCarousel;
+export default BannerCarousel;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Navbar, NavbarBrand, Collapse, NavbarToggler, Nav, NavItem } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
-import BookLandLogo from '../../app/assets/BookLandLogo.png';
+import BookLandLogo from '../../app/assets/logos/bookLandLogo.svg';
 import UserLoginForm from '../../features/user/UserLoginForm';
 import './Header.module.css';
 
@@ -12,7 +12,7 @@ const Header = () => {
         <div className='App'>
             <Navbar dark color='primary' stick='top' expand='md'>
                 <NavbarBrand className='ms-5' href='/'>
-                    <img src={BookLandLogo} alt='nucamp logo' className='float-start' />
+                    <img src={BookLandLogo} alt='bookland logo' className='float-start' />
                 </NavbarBrand>
                 <NavbarToggler onClick={() => setMenuOpen(!menuOpen)} />
                 <Collapse isOpen={menuOpen} navbar>

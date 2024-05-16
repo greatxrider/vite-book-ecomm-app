@@ -1,32 +1,35 @@
-import HeadingCarousel from '../../components/Carousel/HeadingCarousel';
+import HeadingCarousel from '../../components/HeadingCarousel/HeadingCarousel';
 import './Heading.module.css';
+import { useGetItemsQuery } from './headingApiSlice';
 
 const Heading = () => {
+    const { data, isError, isLoading, isSuccess } = useGetItemsQuery('computers');
 
-    const items = [
-        {
-            src: 'https://picsum.photos/id/123/1200/400',
-            altText: 'Slide 1',
-            caption: 'Slide 1',
-            key: 1,
-        },
-        {
-            src: 'https://picsum.photos/id/456/1200/400',
-            altText: 'Slide 2',
-            caption: 'Slide 2',
-            key: 2,
-        },
-        {
-            src: 'https://picsum.photos/id/678/1200/400',
-            altText: 'Slide 3',
-            caption: 'Slide 3',
-            key: 3,
-        },
-    ];
+    if (isError) {
+        return (
+            <div>
+                <h1>There was an error!!!</h1>
+            </div>
+        )
+    }
 
-    return (
-        <HeadingCarousel items={items} />
-    )
+    if (isLoading) {
+        return (
+            <div>
+                <h1>Loading...</h1>
+            </div>
+        )
+    }
+
+    if (isSuccess) {
+        return (
+            <>
+                <HeadingCarousel items={data?.items} />
+            </>
+        );
+    }
+
+    return null;
 }
 
 export default Heading;
