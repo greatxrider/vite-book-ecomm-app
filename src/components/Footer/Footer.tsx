@@ -5,7 +5,10 @@ const Footer = () => {
     return (
         <footer className='site-footer'>
             <Container>
-
+                <Row>
+                    <Col>
+                    </Col>
+                </Row>
             </Container>
         </footer>
     )
