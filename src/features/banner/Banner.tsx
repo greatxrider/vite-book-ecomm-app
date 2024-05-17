@@ -1,4 +1,4 @@
-import { useGetItemsQuery } from '../heading/headingApiSlice';
+import { useGetItemsQuery } from './bannerApiSlice';
 import BannerCarousel from '../../components/BannerCarousel/BannerCarousel';
 import { Row, Col } from 'reactstrap';
 import './Banner.module.css';

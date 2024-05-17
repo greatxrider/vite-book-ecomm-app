@@ -4,6 +4,13 @@ import { NavLink } from 'react-router-dom';
 import BookLandLogo from '../../app/assets/logos/bookLandLogo.svg';
 import UserLoginForm from '../../features/user/UserLoginForm';
 import './Header.module.css';
+import { useAppSelector } from '../../app/hooks';
+import { selectValue } from '../../features/blog/blogSlice';
+
+export const Reaction = (): number => {
+    const varea = useAppSelector(selectValue);
+    return varea;
+}
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);

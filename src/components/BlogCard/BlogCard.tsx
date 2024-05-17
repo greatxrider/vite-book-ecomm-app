@@ -1,33 +1,49 @@
-import { Card, CardBody, CardSubtitle, CardText, CardTitle, Button } from 'reactstrap';
+import { Card, CardBody, CardTitle, CardText, CardImg, Button, CardSubtitle } from 'reactstrap';
+import { formatDate } from '../../utils/formatDate';
+import { Provider } from 'react-redux';
 
-export const BlogCard = () => {
-    return (
-        <Card
-            style={{
-                width: '18rem'
-            }}
-        >
-            <img
-                alt="Sample"
-                src="https://picsum.photos/300/200"
-            />
-            <CardBody>
-                <CardTitle tag="h5">
-                    Benefits
-                </CardTitle>
-                <CardSubtitle
-                    className="mb-2 text-muted"
-                    tag="h6"
-                >
-                    Card subtitle
-                </CardSubtitle>
-                <CardText>
-                    Some quick example text to build on the card title and make up the bulk of the card‘s content.
-                </CardText>
-                <Button>
-                    Button
-                </Button>
-            </CardBody>
-        </Card>
-    )
+interface BlogCardProps {
+    blog: {
+        name: string;
+        url: string;
+        image: {
+            contentUrl: string;
+        };
+        description: string;
+        about: {
+            readLink: string;
+            name: string;
+        }[];
+        provider: {
+            _type: string;
+            name: string;
+            image: {
+                thumbnail: {
+                    contentUrl: string;
+                };
+            };
+        }[];
+        datePublished: string;
+        category: string;
+    }[];
 }
+
+export const BlogCard: React.FC<BlogCardProps> = ({ blog }) => {
+    const Cards = blog.map((item, index) => {
+        const providerNames = item.provider.map(provider => provider.name).join(', ');
+
+        return (
+            <Card key={index} style={{ width: '18rem', marginBottom: '20px' }}>
+                <CardImg top width="100%" src={item.image.contentUrl} alt="Blog Image" />
+                <CardBody>
+                    <CardTitle tag="h5">{item.name}</CardTitle>
+                    <CardSubtitle>{providerNames} {formatDate(item.datePublished)}</CardSubtitle>
+                    <CardText>{item.description}</CardText>
+                    <Button color="primary" href={item.url} target="_blank">Continue Reading</Button>
+                </CardBody>
+            </Card>
+        )
+    })
+
+    return <div>{Cards}</div>;
+};

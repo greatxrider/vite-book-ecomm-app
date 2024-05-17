@@ -51,7 +51,7 @@ const BannerCarousel = ({ items }: BannerCarouselProps) => {
         setActiveIndex(newIndex);
     };
 
-    const slides = items.map((item) => {
+    const slides = items.map((item, index) => {
         const { title } = item.volumeInfo;
         const { thumbnail } = item.volumeInfo.imageLinks;
         const { amount, currencyCode } = item.saleInfo.retailPrice;
@@ -60,7 +60,7 @@ const BannerCarousel = ({ items }: BannerCarouselProps) => {
             <CarouselItem
                 onExiting={() => setAnimating(true)}
                 onExited={() => setAnimating(false)}
-                key={item.id}
+                key={index}
             >
                 <Card
                     style={{
