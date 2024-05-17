@@ -3,9 +3,15 @@ import { Button } from 'reactstrap';
 import { useGetItemsQuery } from './blogApiSlice';
 import './Blog.module.css';
 import { viewMore } from './blogSlice';
+import { useAppDispatch } from '../../app/hooks';
 
-const Blog: React.FC = () => {
-    const { data, isError, isLoading } = useGetItemsQuery('reading books');
+interface BlogProps {
+    count: number;
+}
+
+const Blog: React.FC<BlogProps> = ({ count }) => {
+    const { data, isError, isLoading } = useGetItemsQuery({ query: 'reading books', count: count });
+    const dispatch = useAppDispatch();
 
     if (isError) {
         return (
@@ -28,7 +34,7 @@ const Blog: React.FC = () => {
             {data?.value.map((blog, index) => (
                 <BlogCard key={index} blog={[blog]} />
             ))}.
-            {/* <Button onClick={() => dispatch(viewMore())}>View more</Button> */}
+            <Button onClick={() => dispatch(viewMore())}>View more</Button>
         </>
     );
 }

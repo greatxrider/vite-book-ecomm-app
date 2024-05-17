@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
 interface Blog {
     name: string;
     url: string;
@@ -37,21 +38,23 @@ export const blogsApiSlice = createApi({
     }),
     reducerPath: "blogApi",
     tagTypes: ["Blog"],
-    endpoints: (build) => {
-        return ({
-            getItems: build.query<BlogsApiResponse, string>({
-                query: (query) => ({
+    endpoints: (build) => ({
+        getItems: build.query<BlogsApiResponse, { query: string; count: number }>({
+            query: ({ query, count }) => {
+                const params = new URLSearchParams({
+                    q: query,
+                    count: count.toString(),
+                    originalImg: 'true',
+                });
+
+                return {
                     url: "",
-                    params: {
-                        q: query,
-                        originalImg: true,
-                        count: 1,
-                    }
-                }),
-                providesTags: (result, error, query) => [{ type: "Blog", query }],
-            }),
-        });
-    },
-})
+                    params,
+                };
+            },
+            providesTags: (result, error, { query }) => [{ type: "Blog", query }],
+        }),
+    }),
+});
 
 export const { useGetItemsQuery } = blogsApiSlice;

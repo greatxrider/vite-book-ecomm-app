@@ -6,8 +6,12 @@ import BooksOnSale from '../../features/booksOnSale/BooksOnSale';
 import Testimonials from '../../features/testimonials/Testimonials';
 import Blog from '../../features/blog/Blog';
 import './HomePage.module.css';
+import { useAppSelector } from '../../app/hooks';
+import { selectValue } from '../../features/blog/blogSlice';
 
 const HomePage = () => {
+    const count = useAppSelector(selectValue);
+
     return (
         <Container className='mainHero'>
             <Heading />
@@ -15,7 +19,7 @@ const HomePage = () => {
             <Banner />
             <BooksOnSale />
             <Testimonials />
-            <Blog />
+            <Blog count={count} />
         </Container>
     )
 }
