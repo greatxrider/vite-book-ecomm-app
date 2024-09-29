@@ -13,7 +13,7 @@ const HomePage = () => {
     const count = useAppSelector(selectValue);
 
     return (
-        <Container className='mainHero'>
+        <Container className='homePage'>
             <Heading />
             <Partners />
             <Banner />
