@@ -83,4 +83,4 @@ This project is licensed under the `MIT License`.
 
 For more details and documentation, refer to the project wiki or documentation folder.
 
-If you have any questions or feedback, please reach out to us at [email@example.com](mailto:email@example.com).
+If you have any questions or feedback, please reach out to me at [daligdig.jephmari@gmail.com](mailto:daligdig.jephmari@gmail.com).
