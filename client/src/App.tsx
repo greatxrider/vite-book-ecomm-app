@@ -6,7 +6,6 @@ import Footer from './components/Footer/Footer';
 import { useEffect } from 'react';
 import { useAppDispatch } from './app/hooks';
 import Header from './components/Header/Header';
-import "./App.css";
 
 const App = () => {
   const dispatch = useAppDispatch();

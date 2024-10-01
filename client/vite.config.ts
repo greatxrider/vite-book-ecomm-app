@@ -5,14 +5,10 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: resolve(__dirname, 'src'), // Set the root directory to 'src'
   plugins: [
     react(), // Add React plugin
     svgr(),  // Add SVGR plugin for importing SVGs as React components
   ],
-  build: {
-    outDir: '../dist', // Output directory for build files
-  },
   server: {
     open: true, // Automatically open the app in the browser on server start
   },
