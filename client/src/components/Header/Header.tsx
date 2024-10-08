@@ -13,7 +13,7 @@ export const Reaction = (): number => {
 }
 
 const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
     return (
         <div className='App'>
