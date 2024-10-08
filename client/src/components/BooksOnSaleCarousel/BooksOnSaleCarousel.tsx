@@ -52,9 +52,9 @@ const BooksOnSaleCarousel = ({ items }: BooksOnSaleCarouselProps) => {
     };
 
     const slides = items.map((item) => {
-        const { title, categories } = item.volumeInfo;
-        const { thumbnail } = item.volumeInfo.imageLinks;
-        const { amount, currencyCode } = item.saleInfo.retailPrice;
+        const { title, categories = [] } = item.volumeInfo || {};
+        const thumbnail = item.volumeInfo?.imageLinks?.thumbnail || 'path_to_default_image.jpg';
+        const { amount = 0, currencyCode = '' } = item.saleInfo?.retailPrice || {};
 
         return (
             <CarouselItem
@@ -62,36 +62,24 @@ const BooksOnSaleCarousel = ({ items }: BooksOnSaleCarouselProps) => {
                 onExited={() => setAnimating(false)}
                 key={item.id}
             >
-                <Card
-                    style={{
-                        width: '18rem'
-                    }}
-                >
-                    <img
-                        alt={item.id}
-                        src={thumbnail}
-                    />
+                <Card style={{ width: '18rem' }}>
+                    <img alt={item.id} src={thumbnail} />
                     <CardBody>
-                        <CardTitle tag="h5">
-                            {title}
-                        </CardTitle>
-                        <CardSubtitle>
-                            {categories}
-                        </CardSubtitle>
+                        <CardTitle tag="h5">{title || 'Untitled'}</CardTitle>
+                        <CardSubtitle>{categories.join(', ') || 'No category'}</CardSubtitle>
+                        <CardText>Rating 4.5</CardText>
                         <CardText>
-                            Rating 4.5
+                            <span>{currencyCode ? currencyCode : ''}{amount}</span>
                         </CardText>
                         <CardText>
-                            <span>{currencyCode ? '$' : null}{amount}</span>
-                        </CardText>
-                        <CardText>
-                            <span>{currencyCode ? '$' : null}{amount - (amount * (20 / 100))}</span>
+                            <span>{currencyCode ? currencyCode : ''}{amount - (amount * 0.2)}</span>
                         </CardText>
                     </CardBody>
                 </Card>
             </CarouselItem>
         );
     });
+
 
     return (
         <Carousel
